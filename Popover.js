@@ -37,6 +37,7 @@ var Popover = React.createClass({
   propTypes: {
     isVisible: PropTypes.bool,
     onClose: PropTypes.func,
+    onBgPress:PropTypes.func
   },
   getInitialState() {
     return {
@@ -59,6 +60,7 @@ var Popover = React.createClass({
       arrowSize: DEFAULT_ARROW_SIZE,
       placement: 'auto',
       onClose: noop,
+      onBgPress:noop
     };
   },
   measureContent(x) {
@@ -345,7 +347,9 @@ var Popover = React.createClass({
     return (
       <TouchableWithoutFeedback onPress={this.props.onClose}>
         <View style={[styles.container, contentSizeAvailable && styles.containerVisible ]}>
-          <Animated.View style={[styles.background, ...extendedStyles.background]}/>
+         <TouchableWithoutFeedback onPress={this.props.onBgPress}>
+            <Animated.View style={[styles.background, ...extendedStyles.background]}/>
+          </TouchableWithoutFeedback>
           <Animated.View style={[styles.popover, {
             top: popoverOrigin.y,
             left: popoverOrigin.x,
@@ -386,10 +390,6 @@ var styles = StyleSheet.create({
   popover: {
     backgroundColor: 'transparent',
     position: 'absolute',
-    shadowColor: 'black',
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 2,
-    shadowOpacity: 0.8,
   },
   content: {
     borderRadius: 3,
