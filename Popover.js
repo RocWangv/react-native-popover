@@ -375,6 +375,7 @@ var styles = StyleSheet.create({
     right: 0,
     position: 'absolute',
     backgroundColor: 'transparent',
+    zIndex:999
   },
   containerVisible: {
     opacity: 1,
